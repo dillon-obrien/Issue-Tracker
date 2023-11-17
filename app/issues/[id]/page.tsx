@@ -3,15 +3,17 @@ import prisma from "@/prisma/client";
 import { Heading, Text, Flex, Card } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
 import React from "react";
+import ReactMarkdown from "react-markdown";
+
 interface Props {
   params: { id: string };
 }
 
 const IssueDetailsPage = async ({ params }: Props) => {
-  if (typeof params.id !== "number") notFound();
   const issue = await prisma.issue.findUnique({
     where: { id: parseInt(params.id) },
   });
+  //if (typeof params.id !== "number") return notFound();
 
   if (!issue) return notFound();
 
@@ -22,8 +24,8 @@ const IssueDetailsPage = async ({ params }: Props) => {
         <IssueStatusBadge status={issue.status} />
         <Text>{issue.createdAt.toDateString()}</Text>
       </Flex>
-      <Card>
-        <p>{issue.description}</p>
+      <Card className="Prose" mt="4">
+        <ReactMarkdown>{issue.description}</ReactMarkdown>
       </Card>
     </div>
   );
