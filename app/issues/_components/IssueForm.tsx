@@ -1,24 +1,25 @@
 "use client";
 
-import { Button, TextArea, TextField, Callout, Text } from "@radix-ui/themes";
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
-import "easymde/dist/easymde.min.css";
-import { Controller, useForm } from "react-hook-form";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { issueSchema } from "@/app/validationSchemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import Spinner from "@/app/components/Spinner";
+import { issueSchema } from "@/app/validationSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Issue } from "@prisma/client";
+import { Button, Callout, TextField } from "@radix-ui/themes";
+import axios from "axios";
+import "easymde/dist/easymde.min.css";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import SimpleMDE from "react-simplemde-editor";
+import { z } from "zod";
 
 //How to do lazy loading and disable ssr
+/*
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
 });
-
+*/
 interface Props {
   issue?: Issue;
 }
