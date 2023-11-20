@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Table } from "@radix-ui/themes";
+import { Button, Flex, Table } from "@radix-ui/themes";
 import prisma from "@/prisma/client";
 import NextLink from "next/link";
 import IssueStatusBadge from "../components/IssueStatusBadge";
@@ -93,11 +93,13 @@ const IssuesPage = async ({ searchParams }: Props) => {
           ))}
         </Table.Body>
       </Table.Root>
-      <Pagination
-        pageSize={pageSize}
-        currentPage={page}
-        itemCount={issueCount}
-      />
+      <Flex className="mt-3">
+        <Pagination
+          pageSize={pageSize}
+          currentPage={page}
+          itemCount={issueCount}
+        />
+      </Flex>
     </div>
   );
 };
